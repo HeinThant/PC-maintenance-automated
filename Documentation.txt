@@ -1,0 +1,55 @@
+Scheduling a PC Maintenance Task in Task Scheduler
+This guide explains how to schedule a PC maintenance task using Task Scheduler on Windows. The task will automatically run a PowerShell script at a specified time to perform maintenance, such as clearing temp files, emptying the recycle bin, and defragmenting the drive.
+
+Prerequisites
+Before scheduling the task, ensure you have:
+✅ A PowerShell script (PC_Maintenance.ps1) saved in a known location.
+✅ Administrator privileges on your Windows PC.
+
+Step-by-Step Guide
+Step 1: Open Task Scheduler
+Press Win + R, type taskschd.msc, and press Enter.
+In the Task Scheduler window, click Create Basic Task in the right pane.
+Step 2: Configure Basic Task
+Name the Task: Enter a name like PC Maintenance and click Next.
+Choose the Frequency: Select one of the following based on how often you want the script to run:
+Daily – Runs every day at a specific time.
+Weekly – Runs on specific days of the week.
+Monthly – Runs on a set date each month.
+Click Next and choose the start date and time.
+Step 3: Set the Action
+Select Start a Program and click Next.
+In the Program/script box, enter:
+Copy
+Edit
+powershell.exe
+In the Add arguments (optional) box, enter the following command:
+arduino
+Copy
+Edit
+-ExecutionPolicy Bypass -File "C:\Path\to\PC_Maintenance.ps1"
+(Replace "C:\Path\to\PC_Maintenance.ps1" with the actual file path of your script.)
+Click Next to proceed.
+Step 4: Configure Task Settings
+Check "Open the Properties dialog for this task when I click Finish" and click Finish.
+In the General tab:
+Check Run with highest privileges to ensure admin-level access.
+Under Configure for, select Windows 10/11 (or your version).
+Go to the Conditions tab:
+Uncheck Start the task only if the computer is on AC power (if you want it to run on battery).
+Click OK to save the task.
+Step 5: Verify the Task
+In Task Scheduler, locate PC Maintenance under Task Scheduler Library.
+Right-click it and select Run to test if the script executes successfully.
+Check for a log file (if implemented in the script) to confirm the task ran properly.
+Troubleshooting
+🔹 Task doesn’t run?
+
+Ensure the PowerShell script is accessible (correct file path).
+Check the Task Scheduler history/logs for errors.
+Ensure Run with highest privileges is enabled.
+🔹 Need admin permissions?
+
+Run Task Scheduler as an administrator.
+Conclusion
+By following this guide, you have successfully automated a PC maintenance task using Windows Task Scheduler. The scheduled script will now run at your chosen frequency, ensuring regular cleanup and optimization.
